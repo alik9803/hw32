@@ -1,5 +1,6 @@
 package ru.hogwarts.school2.service;
 
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school2.model.Faculty;
@@ -12,17 +13,19 @@ import java.util.Collection;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
-@Autowired
+
+    @Autowired
     public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+
     @Override
     public Collection<Student> findStudentsByAgeBetween(int min, int max) {
         return studentRepository.findByAgeBetween(min, max);
     }
 
     public Collection<Student> getStudentsByFaculty(Faculty faculty) {
-        return faculty.getStudents();
+        return studentRepository.findByFaculty(faculty);
     }
 
     @Override
@@ -34,21 +37,31 @@ public class StudentServiceImpl implements StudentService {
     public Student addStudent(Student student) {
         return studentRepository.save(student);
     }
+
     @Override
     public Student findStudent(Long id) {
         return studentRepository.findById(id).orElse(null);
     }
+
     @Override
     public Student editStudent(Long id, Student student) {
-        return studentRepository.save(student);
+        return studentRepository.findById(id)
+                .map(foundStudent -> {
+                    foundStudent.setName(student.getName());
+                    foundStudent.setAge(student.getAge());
+                    foundStudent.setFaculty(student.getFaculty());
+                    return studentRepository.save(foundStudent);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found with id: " + id));
     }
+
     @Override
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }
 
     @Override
-    public Collection<Student> getAllStudents() {
-        return null;
+    public void getAllStudents() {
+        studentRepository.findAll();
     }
 }

@@ -5,7 +5,6 @@ import ru.hogwarts.school2.model.Faculty;
 import ru.hogwarts.school2.model.Student;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 public interface StudentService {
@@ -16,7 +15,7 @@ public interface StudentService {
     Student editStudent(Long id, Student student);
 
     void deleteStudent(Long id);
-    Collection<Student> getAllStudents();
+    void getAllStudents();
 
     Collection<Student> findStudentsByAgeBetween(int min, int max);
 
