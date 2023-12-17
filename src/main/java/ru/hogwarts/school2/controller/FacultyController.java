@@ -1,7 +1,4 @@
 package ru.hogwarts.school2.controller;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school2.model.Faculty;
@@ -22,8 +19,7 @@ public class FacultyController {
         this.facultyService = facultyService;
         this.studentService = studentService;
     }
-    @Operation
-    @ApiResponse
+
     @GetMapping("/search")
     public ResponseEntity<Collection<Faculty>> getFacultiesByNameOrColor(@RequestParam(required = false, defaultValue = "") String name,
                                                                          @RequestParam(required = false, defaultValue = "") String color) {

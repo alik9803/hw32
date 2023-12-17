@@ -1,7 +1,4 @@
 package ru.hogwarts.school2.controller;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school2.model.Faculty;
@@ -22,8 +19,7 @@ public class StudentController {
         this.studentService = studentService;
         this.facultyService = facultyService;
     }
-    @Operation
-    @ApiResponse
+
     @GetMapping("/find-by-id/{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         Student student = studentService.findStudent(id);
@@ -48,7 +44,7 @@ public class StudentController {
 
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);
+        return studentService.createStudent(student);
     }
 
     @PutMapping("/{id}")

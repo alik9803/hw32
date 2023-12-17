@@ -12,7 +12,8 @@ public class Faculty {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name, color;
-
+    @OneToMany(mappedBy = "faculty")
+    private Set<Student> students;
     public Faculty(long id, String name, String color) {
         this.id = id;
         this.name = name;
@@ -70,8 +71,6 @@ public class Faculty {
     public void setColor(String color) {
         this.color = color;
     }
-    @OneToMany(mappedBy = "faculty")
-    private Set<Student> students;
 
     public Set<Student> getStudents() {
         return students;

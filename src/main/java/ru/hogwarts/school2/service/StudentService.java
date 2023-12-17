@@ -21,4 +21,6 @@ public interface StudentService {
     Collection<Student> findStudentsByAgeBetween(int min, int max);
 
     Collection<Student> getStudentsByFaculty(Faculty faculty);
+
+    Student createStudent(Student student);
 }

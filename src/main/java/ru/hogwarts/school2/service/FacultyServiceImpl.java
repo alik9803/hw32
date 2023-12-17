@@ -15,7 +15,7 @@ public class FacultyServiceImpl implements FacultyService {
     public FacultyServiceImpl(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;
     }
-
+    @Override
     public Faculty addFaculty(Faculty faculty) {
         return facultyRepository.save(faculty);
 
@@ -33,11 +33,11 @@ public class FacultyServiceImpl implements FacultyService {
     public Faculty getFacultyByStudent(Student student) {
         return student.getFaculty();
     }
-
+    @Override
     public Faculty findFaculty(Long id) {
         return facultyRepository.findById(id).orElse(null);
     }
-
+    @Override
     public Faculty editFaculty(Long id, Faculty faculty) {
         Optional<Faculty> optionalFaculty = facultyRepository.findById(id);
         if (optionalFaculty.isPresent()) {
@@ -49,6 +49,7 @@ public class FacultyServiceImpl implements FacultyService {
             return null;
         }
     }
+    @Override
     public void deleteFaculty(Long id) {
         facultyRepository.deleteById(id);
     }
