@@ -3,8 +3,7 @@ package ru.hogwarts.school2.model;
 import jakarta.persistence.*;
 
 import java.util.Objects;
-
-@Entity(name = "any_student")
+@Entity(name="student")
 public class Student {
 
     @Id

@@ -1,5 +1,4 @@
 package ru.hogwarts.school2.service;
-
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school2.model.Faculty;

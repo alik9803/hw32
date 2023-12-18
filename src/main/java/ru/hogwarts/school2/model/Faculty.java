@@ -13,19 +13,26 @@ public class Faculty {
     private Long id;
     private String name;
     private String color;
+    public Faculty() {
+
+    }
     @JsonIgnore
     @OneToMany(mappedBy = "faculty")
     private Collection<Student> students;
 
-    public Faculty(Long id, String name, String color) {
+    public Faculty(Long id, String name, String color, Collection<Student> students) {
         this.id = id;
         this.name = name;
         this.color = color;
+        this.students = students;
     }
 
-    public Faculty() {
+    public Faculty(Collection<Student> students) {
 
+        this.students = students;
     }
+
+
 
     @JsonIgnore
     public Collection<Student> getStudent() {
